@@ -1,6 +1,5 @@
 package com.lazMalling.user.service;
 
-import com.lazMalling.user.model.Role;
 import com.lazMalling.user.model.User;
 import com.lazMalling.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String postUser(String firstName,String lastName,String email,String password,String mobile,String role){
-        User user= new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setMobile(mobile);
-        user.setRole(Role.valueOf(role));
-
-        System.out.println(userRepository.save(user));
-
-        return "saved";
+    public User postUser(User user){
+        return userRepository.save(user);
     }
 
     public List<User> getAllUser(){

@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -31,7 +32,7 @@ public class User {
     @Column(name = "mobile")
     private String mobile;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name="role")
+    private String role;
 
 }
