@@ -3,6 +3,8 @@ package com.lazMalling.user.service;
 import com.lazMalling.user.model.User;
 import com.lazMalling.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,14 +14,13 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private final UserRepository userRepository;
+    private  UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
-    public User postUser(User user){
-        return userRepository.save(user);
+
+    public ResponseEntity<HttpStatus> postUser(User user){
+         userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public List<User> getAllUser(){
@@ -30,13 +31,16 @@ public class UserService {
         return  userRepository.findById(id);
     }
 
-    public User updateUserById(long id,User user){
+    public ResponseEntity<HttpStatus> updateUserById(long id,User user){
         user.setId(id);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public void deleteUserById(long id){
+    public ResponseEntity<HttpStatus> deleteUserById(long id){
+
         userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

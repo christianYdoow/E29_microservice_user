@@ -4,6 +4,8 @@ package com.lazMalling.user.controller;
 import com.lazMalling.user.model.User;
 import com.lazMalling.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public @ResponseBody User postUser(@RequestBody User user){
+    public @ResponseBody ResponseEntity<HttpStatus> postUser(@RequestBody User user){
         return userService.postUser(user);
     }
     @GetMapping("/users")
@@ -37,13 +39,13 @@ public class UserController {
         return userService.getUserById(id);
     }
     @PutMapping("/users/{id}")
-    public User updateUserById(@PathVariable long id, @RequestBody User user){
+    public ResponseEntity<HttpStatus> updateUserById(@PathVariable long id, @RequestBody User user){
         return userService.updateUserById(id,user);
     }
 
     @DeleteMapping("/users/{id}")
-    public void deleteUserById(@PathVariable long id){
-        userService.deleteUserById(id);
+    public ResponseEntity<HttpStatus> deleteUserById(@PathVariable long id){
+       return  userService.deleteUserById(id);
     }
 
 }
